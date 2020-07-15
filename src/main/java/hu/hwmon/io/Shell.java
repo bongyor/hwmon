@@ -8,6 +8,7 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Shell {
+    @NonNull public String call(@NonNull String command) { return call(command, null); }
     @NonNull public String call(@NonNull String command, String[] envp) {
         try {
             var process = Runtime.getRuntime().exec(command, envp);

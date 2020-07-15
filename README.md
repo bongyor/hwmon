@@ -21,4 +21,5 @@ Rendszer monitor, ami pici aranyos ikonokat rajzol a taskbarra a cpu és memóri
 
 ## TODO
 
-* hálózat használat, disk io grafikonok
+* /proc resource használata mindenhol
+* windows?
