@@ -12,7 +12,7 @@ import java.util.List;
 public class HalozatIkon extends TaskbarIkon<HalozatAllapot> {
     private String tooltip = "";
     private HalozatAllapot utolsoAllapot = null;
-    private double maxSavszelesseg = 500;
+    private double maxSavszelesseg = 1_000_000;
     private static final Color[] szinek = new Color[] {
         Color.ORANGE,
         Color.CYAN,

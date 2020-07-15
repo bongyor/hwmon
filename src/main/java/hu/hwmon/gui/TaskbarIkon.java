@@ -10,11 +10,12 @@ import java.util.stream.Collectors;
 
 public abstract class TaskbarIkon<T> {
     static final int PIXELSZAM = 24;
-    private static final SystemTray tray = SystemTray.getSystemTray();
+    private SystemTray tray = null;
     private BufferedImage image = new BufferedImage(PIXELSZAM, PIXELSZAM, BufferedImage.TYPE_INT_RGB);
-    private final TrayIcon trayIcon;
+    private TrayIcon trayIcon;
 
-    public TaskbarIkon() {
+    private void init() {
+        tray = SystemTray.getSystemTray();
         if (!SystemTray.isSupported()) {
             throw new HwMonException("SystemTray is not supported");
         }
@@ -37,6 +38,9 @@ public abstract class TaskbarIkon<T> {
     }
 
     public void ujraRajzolas(T adat) {
+        if (tray == null) {
+            init();
+        }
         var newImage = regiMasolasaEltolva();
         var aranyok = formatter(adat);
         var ujOszlop = getPixelszamok(aranyok);
