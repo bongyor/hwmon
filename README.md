@@ -26,3 +26,10 @@ Rendszer monitor, ami pici aranyos ikonokat rajzol a taskbarra a cpu és memóri
 
 * /proc resource használata mindenhol
 * windows?
+* Olyan tray ikon megoldás keresése, ami nem villog az ikon frissítésnél
+    * Eddigi próbálkozások
+        * java.awt.TrayIcon (ez van most)
+            * villog és nem is lehet vele mit csinálni
+        * https://github.com/dorkbox/SystemTray
+            * egyetlen ikont tud kezelni alkalmazásonként
+            * csak 64 karakteres tooltip-et engedélyez 
