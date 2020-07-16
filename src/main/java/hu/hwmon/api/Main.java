@@ -9,6 +9,8 @@ import hu.hwmon.io.MemoriaFigyelo;
 import hu.hwmon.io.ProcesszorFigyelo;
 import hu.hwmon.io.VerifyModularization;
 
+import java.util.concurrent.TimeUnit;
+
 public class Main {
     private static final System.Logger logger = System.getLogger("hwmon");
 
@@ -21,11 +23,28 @@ public class Main {
     private static final ProcesszorFigyelo processzorFigyelo = new ProcesszorFigyelo();
     private static final HalozatFigyelo halozatFigyelo = new HalozatFigyelo();
 
+    private static boolean run = true;
+
     public static void main(String[] args) {
         VerifyModularization.verify();
-        while (true) {
+        addShutdownHook();
+
+        while (run) {
             frissites();
+            sleepOneSec();
         }
+    }
+
+    private static void sleepOneSec() {
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    private static void addShutdownHook() {
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> run = false));
     }
 
     private static void frissites() {
