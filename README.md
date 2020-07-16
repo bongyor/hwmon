@@ -1,4 +1,7 @@
 # hwmon
+
+![Java CI with Maven](https://github.com/bongyor/hwmon/workflows/Java%20CI%20with%20Maven/badge.svg)
+
 Rendszer monitor, ami pici aranyos ikonokat rajzol a taskbarra a cpu és memória használatról
 
 ## Működés
