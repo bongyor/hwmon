@@ -11,10 +11,11 @@ import java.util.stream.Collectors;
 public abstract class TaskbarIkon<T> {
     static final int PIXELSZAM = 24;
     private SystemTray tray = null;
-    private BufferedImage image = new BufferedImage(PIXELSZAM, PIXELSZAM, BufferedImage.TYPE_INT_RGB);
+    private BufferedImage image = null;
     private TrayIcon trayIcon;
 
     private void init() {
+        image = new BufferedImage(PIXELSZAM, PIXELSZAM, BufferedImage.TYPE_INT_RGB);
         tray = SystemTray.getSystemTray();
         if (!SystemTray.isSupported()) {
             throw new HwMonException("SystemTray is not supported");
