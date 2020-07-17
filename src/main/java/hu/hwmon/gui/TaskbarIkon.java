@@ -9,14 +9,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class TaskbarIkon<T> {
-    static final int PIXELSZAM = 24;
+    private Dimension trayIconSize = new Dimension(24, 24);
     private SystemTray tray = null;
     private BufferedImage image = null;
     private TrayIcon trayIcon;
 
     private void init() {
-        image = new BufferedImage(PIXELSZAM, PIXELSZAM, BufferedImage.TYPE_INT_RGB);
         tray = SystemTray.getSystemTray();
+        trayIconSize = tray.getTrayIconSize();
+        image = new BufferedImage(trayIconSize.width, trayIconSize.height, BufferedImage.TYPE_INT_RGB);
         if (!SystemTray.isSupported()) {
             throw new HwMonException("SystemTray is not supported");
         }
@@ -29,7 +30,7 @@ public abstract class TaskbarIkon<T> {
     }
 
     private BufferedImage regiMasolasaEltolva() {
-        var newImage = new BufferedImage(PIXELSZAM, PIXELSZAM, BufferedImage.TYPE_INT_RGB);
+        var newImage = new BufferedImage(trayIconSize.width, trayIconSize.height, BufferedImage.TYPE_INT_RGB);
         for (int x = 1; x < image.getWidth(); x++) {
             for (int y = 0; y < image.getHeight(); y++) {
                 newImage.setRGB(x - 1, y, image.getRGB(x, y));
@@ -65,17 +66,17 @@ public abstract class TaskbarIkon<T> {
 
     int[] getPixelszamok(List<Double> aranyok) {
         var summ = aranyok.stream().mapToDouble(Double::doubleValue).sum();
-        var egyPixelErteke = summ / (double) PIXELSZAM;
+        var egyPixelErteke = summ / trayIconSize.getHeight();
         var pixelek = aranyok
             .stream()
             .map(arany -> Math.round(arany / egyPixelErteke))
             .collect(Collectors.toList());
 
-        if (pixelek.stream().mapToLong(Long::longValue).sum() < PIXELSZAM) {
+        if (pixelek.stream().mapToLong(Long::longValue).sum() < trayIconSize.getHeight()) {
             var legnagyobbArany = Collections.max(aranyok);
             var legnagyobbAranyIndex = aranyok.indexOf(legnagyobbArany);
             pixelek.set(legnagyobbAranyIndex, pixelek.get(legnagyobbAranyIndex) + 1);
-        } else if (pixelek.stream().mapToLong(Long::longValue).sum() > PIXELSZAM) {
+        } else if (pixelek.stream().mapToLong(Long::longValue).sum() > trayIconSize.getHeight()) {
             var legnagyobbArany = Collections.max(aranyok);
             var legnagyobbAranyIndex = aranyok.indexOf(legnagyobbArany);
             pixelek.set(legnagyobbAranyIndex, pixelek.get(legnagyobbAranyIndex) - 1);

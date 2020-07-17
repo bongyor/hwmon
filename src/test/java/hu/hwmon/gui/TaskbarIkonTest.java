@@ -17,7 +17,7 @@ class TaskbarIkonTest {
             new int[] {4, 8, 12},
             pixelSzamok
         );
-        assertEquals(TaskbarIkon.PIXELSZAM, Arrays.stream(pixelSzamok).sum());
+        assertEquals(24, Arrays.stream(pixelSzamok).sum());
 
         assertArrayEquals(
             new int[] {0, 0, 5, 9, 10},
