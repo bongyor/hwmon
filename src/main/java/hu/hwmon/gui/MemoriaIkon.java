@@ -13,6 +13,7 @@ public class MemoriaIkon extends TaskbarIkon<MemoriaAllapot> {
         Color.CYAN,
         Color.BLACK,
         Color.YELLOW,
+        Color.BLUE,
     };
 
     @Override
@@ -21,7 +22,8 @@ public class MemoriaIkon extends TaskbarIkon<MemoriaAllapot> {
             adat.getMemFelhasznalt(),
             adat.getShared(),
             adat.getFree(),
-            adat.getBuffCache()
+            adat.getCache(),
+            adat.getBuffers()
         );
     }
 
@@ -33,11 +35,12 @@ public class MemoriaIkon extends TaskbarIkon<MemoriaAllapot> {
     @Override
     protected String getToolTip(MemoriaAllapot adat) {
         return String.format(
-            "Memória: %s usr, %s shr, %s free, %s buff, %s avaiable",
+            "Memória: %s usr, %s shr, %s free, %s cache, %s buff, %s avaiable",
             adat.getMemFelhasznalt(),
             adat.getShared(),
             adat.getFree(),
-            adat.getBuffCache(),
+            adat.getCache(),
+            adat.getBuffers(),
             adat.getAvaiable()
         );
     }

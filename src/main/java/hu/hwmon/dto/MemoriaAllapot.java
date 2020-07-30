@@ -13,7 +13,8 @@ public class MemoriaAllapot {
     double memFelhasznalt;
     double swapFelhasznalt;
     double shared;
-    double buffCache;
+    double buffers;
+    double cache;
     double avaiable;
     double free;
 }
