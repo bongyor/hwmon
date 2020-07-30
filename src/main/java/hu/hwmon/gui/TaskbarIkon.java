@@ -1,6 +1,6 @@
 package hu.hwmon.gui;
 
-import hu.hwmon.dto.HwMonException;
+import hu.hwmon.io.IconBackend;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -10,23 +10,13 @@ import java.util.stream.Collectors;
 
 public abstract class TaskbarIkon<T> {
     private Dimension trayIconSize = new Dimension(24, 24);
-    private SystemTray tray = null;
     private BufferedImage image = null;
-    private TrayIcon trayIcon;
+    private IconBackend iconBackend;
 
     private void init() {
-        tray = SystemTray.getSystemTray();
-        trayIconSize = tray.getTrayIconSize();
         image = new BufferedImage(trayIconSize.width, trayIconSize.height, BufferedImage.TYPE_INT_RGB);
-        if (!SystemTray.isSupported()) {
-            throw new HwMonException("SystemTray is not supported");
-        }
-        trayIcon = new TrayIcon(image);
-        try {
-            tray.add(trayIcon);
-        } catch (AWTException e) {
-            throw new HwMonException("TrayIcon could not be added.");
-        }
+        iconBackend = IconBackend.build(image);
+        trayIconSize = iconBackend.getTrayIconSize();
     }
 
     private BufferedImage regiMasolasaEltolva() {
@@ -40,15 +30,15 @@ public abstract class TaskbarIkon<T> {
     }
 
     public void ujraRajzolas(T adat) {
-        if (tray == null) {
+        if (iconBackend == null) {
             init();
         }
         var newImage = regiMasolasaEltolva();
         var aranyok = formatter(adat);
         var ujOszlop = getPixelszamok(aranyok);
         image = pixelekBerajzolasa(newImage, ujOszlop);
-        trayIcon.setImage(image);
-        trayIcon.setToolTip(getToolTip(adat));
+        iconBackend.setImage(image);
+        iconBackend.setToolTip(getToolTip(adat));
     }
 
     protected BufferedImage pixelekBerajzolasa(BufferedImage newImage, int[] ujOszlop) {
