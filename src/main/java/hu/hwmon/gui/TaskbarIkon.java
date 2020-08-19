@@ -3,70 +3,54 @@ package hu.hwmon.gui;
 import hu.hwmon.io.IconBackend;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class TaskbarIkon<T> {
-    private Dimension trayIconSize = new Dimension(24, 24);
-    private BufferedImage image = null;
     private IconBackend iconBackend;
+    private int oszlopPixelszam = 24;
 
     private void init() {
-        image = new BufferedImage(trayIconSize.width, trayIconSize.height, BufferedImage.TYPE_INT_RGB);
-        iconBackend = IconBackend.build(image);
-        trayIconSize = iconBackend.getTrayIconSize();
-    }
-
-    private BufferedImage regiMasolasaEltolva() {
-        var newImage = new BufferedImage(trayIconSize.width, trayIconSize.height, BufferedImage.TYPE_INT_RGB);
-        for (int x = 1; x < image.getWidth(); x++) {
-            for (int y = 0; y < image.getHeight(); y++) {
-                newImage.setRGB(x - 1, y, image.getRGB(x, y));
-            }
-        }
-        return newImage;
+        iconBackend = IconBackend.build();
+        oszlopPixelszam = iconBackend.getTrayIconSize().height;
     }
 
     public void ujraRajzolas(T adat) {
         if (iconBackend == null) {
             init();
         }
-        var newImage = regiMasolasaEltolva();
         var aranyok = formatter(adat);
-        var ujOszlop = getPixelszamok(aranyok);
-        image = pixelekBerajzolasa(newImage, ujOszlop);
-        iconBackend.setImage(image);
+        var pixelSzamok = getPixelszamok(aranyok);
+        var ujOszlop = getUjOszlop(pixelSzamok);
+        iconBackend.addOszlop(ujOszlop);
         iconBackend.setToolTip(getToolTip(adat));
     }
 
-    protected BufferedImage pixelekBerajzolasa(BufferedImage newImage, int[] ujOszlop) {
-        var kovetkezoPixel = 0;
-        var oszlopIndex = newImage.getWidth() - 1;
-        for (int grafikonSav = szinek().length - 1; grafikonSav >= 0 ; grafikonSav--) {
-            var utolsoPixel = kovetkezoPixel + ujOszlop[grafikonSav];
-            for (;kovetkezoPixel < utolsoPixel && kovetkezoPixel < newImage.getHeight(); kovetkezoPixel++) {
-                newImage.setRGB(oszlopIndex, kovetkezoPixel, szinek()[grafikonSav].getRGB());
+    private int[] getUjOszlop(int[] pixelSzamok) {
+        var oszlop = new int[iconBackend.getTrayIconSize().height];
+        var pixelIndex = 0;
+        for (int i = 0; i < pixelSzamok.length; i++) {
+            for (int oszlopMagassag = 0; oszlopMagassag < pixelSzamok[i]; oszlopMagassag++) {
+                oszlop[pixelIndex++] = szinek()[i].getRGB();
             }
         }
-
-        return newImage;
+        return oszlop;
     }
 
     int[] getPixelszamok(List<Double> aranyok) {
         var summ = aranyok.stream().mapToDouble(Double::doubleValue).sum();
-        var egyPixelErteke = summ / trayIconSize.getHeight();
+        var egyPixelErteke = summ / oszlopPixelszam;
         var pixelek = aranyok
             .stream()
             .map(arany -> Math.round(arany / egyPixelErteke))
             .collect(Collectors.toList());
 
-        if (pixelek.stream().mapToLong(Long::longValue).sum() < trayIconSize.getHeight()) {
+        if (pixelek.stream().mapToLong(Long::longValue).sum() < oszlopPixelszam) {
             var legnagyobbArany = Collections.max(aranyok);
             var legnagyobbAranyIndex = aranyok.indexOf(legnagyobbArany);
             pixelek.set(legnagyobbAranyIndex, pixelek.get(legnagyobbAranyIndex) + 1);
-        } else if (pixelek.stream().mapToLong(Long::longValue).sum() > trayIconSize.getHeight()) {
+        } else if (pixelek.stream().mapToLong(Long::longValue).sum() > oszlopPixelszam) {
             var legnagyobbArany = Collections.max(aranyok);
             var legnagyobbAranyIndex = aranyok.indexOf(legnagyobbArany);
             pixelek.set(legnagyobbAranyIndex, pixelek.get(legnagyobbAranyIndex) - 1);
