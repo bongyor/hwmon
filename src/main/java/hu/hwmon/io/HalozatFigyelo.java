@@ -22,7 +22,7 @@ public class HalozatFigyelo extends Figyelo<HalozatAllapot> {
     HalozatAllapot feldolgoz(String output, LocalDateTime now) {
         var halozatAllapot = output
             .lines()
-            .filter(line -> line.matches("^[0-9a-z ]+[0-9]:.*$"))
+            .filter(line -> line.matches("^[0-9a-z ]+[0-9]:.*$") && !line.startsWith("    lo"))
             .map(
                 line -> {
                     var matcher = pattern.matcher(line);
