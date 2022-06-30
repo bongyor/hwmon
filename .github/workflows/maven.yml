@@ -22,4 +22,4 @@ jobs:
       with:
         java-version: 17
     - name: Build with Maven
-      run: ./mwnw -B package --file pom.xml
+      run: ./mvnw -B package --file pom.xml
