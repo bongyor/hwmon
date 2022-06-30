@@ -11,7 +11,7 @@ Rendszer monitor, ami pici aranyos ikonokat rajzol a taskbarra a cpu és memóri
 
 ## Rendszerkövetelmények
 
-* java 11
+* java 17
 * maven
 
 ## Fordítás, futtatás
@@ -21,6 +21,7 @@ Rendszer monitor, ami pici aranyos ikonokat rajzol a taskbarra a cpu és memóri
 * futtatás
   * modulos módban: `java -Xmx10m --module-path target/hwmon-1.0-SNAPSHOT.jar --module hwmon/hu.hwmon.api.Main`
   * hagyományos módban: `java -Xmx10m -jar target/hwmon-1.0-SNAPSHOT.jar`
+  * saját rendszerben indításkor: `/usr/bin/java -Xmx10m --module-path /home/bongyor/git/hwmon/target/hwmon-1.0-SNAPSHOT.jar --module hwmon/hu.hwmon.api.Main`
 
 ## TODO
 

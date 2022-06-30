@@ -1,15 +1,14 @@
 package hu.hwmon.io;
 
 import hu.hwmon.dto.HwMonException;
-import lombok.NonNull;
 
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Shell {
-    @NonNull public String call(@NonNull String command) { return call(command, null); }
-    @NonNull public String call(@NonNull String command, String[] envp) {
+    public String call(String command) { return call(command, null); }
+    public String call(String command, String[] envp) {
         try {
             var process = Runtime.getRuntime().exec(command, envp);
             process.waitFor(10, TimeUnit.SECONDS);

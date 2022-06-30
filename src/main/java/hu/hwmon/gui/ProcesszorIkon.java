@@ -24,21 +24,21 @@ public class ProcesszorIkon extends TaskbarIkon<ProcesszorAllapot> {
 
         toolTip = String.format(
             "CPU: %2.2f sys, %2.2f io, %2.2f usr, %2.2f nice, %2.2f other, %2.2f idle",
-            szazalekos.getSystem(),
-            szazalekos.getIowait(),
-            szazalekos.getUser(),
-            szazalekos.getNice(),
-            szazalekos.getOther(),
-            szazalekos.getIdle()
+            szazalekos.system(),
+            szazalekos.iowait(),
+            szazalekos.user(),
+            szazalekos.nice(),
+            szazalekos.other(),
+            szazalekos.idle()
         );
 
         return Arrays.asList(
-            szazalekos.getSystem(),
-            szazalekos.getIowait(),
-            szazalekos.getUser(),
-            szazalekos.getNice(),
-            szazalekos.getOther(),
-            szazalekos.getIdle()
+            szazalekos.system(),
+            szazalekos.iowait(),
+            szazalekos.user(),
+            szazalekos.nice(),
+            szazalekos.other(),
+            szazalekos.idle()
         );
     }
 

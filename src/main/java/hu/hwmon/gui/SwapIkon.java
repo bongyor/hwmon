@@ -16,8 +16,8 @@ public class SwapIkon extends TaskbarIkon<MemoriaAllapot> {
     @Override
     protected List<Double> formatter(MemoriaAllapot adat) {
         return Arrays.asList(
-            adat.getSwapFelhasznalt(),
-            adat.getSwapOsszes() - adat.getSwapFelhasznalt()
+            adat.swapFelhasznalt(),
+            adat.swapOsszes() - adat.swapFelhasznalt()
         );
     }
 
@@ -30,8 +30,8 @@ public class SwapIkon extends TaskbarIkon<MemoriaAllapot> {
     protected String getToolTip(MemoriaAllapot adat) {
         return String.format(
             "SWAP: %s/%s",
-            adat.getSwapFelhasznalt(),
-            adat.getSwapOsszes()
+            adat.swapFelhasznalt(),
+            adat.swapOsszes()
         );
     }
 }

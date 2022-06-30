@@ -19,11 +19,11 @@ public class MemoriaIkon extends TaskbarIkon<MemoriaAllapot> {
     @Override
     protected List<Double> formatter(MemoriaAllapot adat) {
         return Arrays.asList(
-            adat.getMemFelhasznalt(),
-            adat.getShared(),
-            adat.getFree(),
-            adat.getCache(),
-            adat.getBuffers()
+            adat.memFelhasznalt(),
+            adat.shared(),
+            adat.free(),
+            adat.cache(),
+            adat.buffers()
         );
     }
 
@@ -36,12 +36,12 @@ public class MemoriaIkon extends TaskbarIkon<MemoriaAllapot> {
     protected String getToolTip(MemoriaAllapot adat) {
         return String.format(
             "Memória: %s usr, %s shr, %s free, %s cache, %s buff, %s avaiable",
-            adat.getMemFelhasznalt(),
-            adat.getShared(),
-            adat.getFree(),
-            adat.getCache(),
-            adat.getBuffers(),
-            adat.getAvaiable()
+            adat.memFelhasznalt(),
+            adat.shared(),
+            adat.free(),
+            adat.cache(),
+            adat.buffers(),
+            adat.avaiable()
         );
     }
 }
