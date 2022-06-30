@@ -21,16 +21,9 @@ Rendszer monitor, ami pici aranyos ikonokat rajzol a taskbarra a cpu és memóri
 * futtatás
   * modulos módban: `java -Xmx10m --module-path target/hwmon-1.0-SNAPSHOT.jar --module hwmon/hu.hwmon.api.Main`
   * hagyományos módban: `java -Xmx10m -jar target/hwmon-1.0-SNAPSHOT.jar`
-  * saját rendszerben indításkor: `/usr/bin/java -Xmx10m --module-path /home/bongyor/git/hwmon/target/hwmon-1.0-SNAPSHOT.jar --module hwmon/hu.hwmon.api.Main`
+  * saját rendszeren indításkor: `/usr/bin/java -Xmx10m --module-path /home/bongyor/git/hwmon/target/hwmon-1.0-SNAPSHOT.jar --module hwmon/hu.hwmon.api.Main`
 
 ## TODO
 
 * /proc resource használata mindenhol
-* windows?
-* Olyan tray ikon megoldás keresése, ami nem villog az ikon frissítésnél
-    * Eddigi próbálkozások
-        * java.awt.TrayIcon (ez van most)
-            * villog és nem is lehet vele mit csinálni
-        * https://github.com/dorkbox/SystemTray
-            * egyetlen ikont tud kezelni alkalmazásonként
-            * csak 64 karakteres tooltip-et engedélyez 
+* windows, mac
