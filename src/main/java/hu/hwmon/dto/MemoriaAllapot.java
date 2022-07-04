@@ -10,7 +10,6 @@ public record MemoriaAllapot(
     double swapFelhasznalt,
     double swapCache,
     double swapActiveAnon,
-    double shared,
     double buffers,
     double cache,
     double dirty,

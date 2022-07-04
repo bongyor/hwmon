@@ -10,7 +10,6 @@ import java.util.List;
 public class MemoriaIkon extends TaskbarIkon<MemoriaAllapot> {
     private static final Color[] szinek = new Color[] {
         Color.GREEN,
-        Color.CYAN,
         Color.BLACK,
         Color.YELLOW,
         Color.BLUE,
@@ -22,7 +21,6 @@ public class MemoriaIkon extends TaskbarIkon<MemoriaAllapot> {
     protected List<Double> formatter(MemoriaAllapot adat) {
         return Arrays.asList(
             adat.memFelhasznalt(),
-            adat.shared(),
             adat.free(),
             adat.cache(),
             adat.buffers(),
@@ -39,12 +37,14 @@ public class MemoriaIkon extends TaskbarIkon<MemoriaAllapot> {
     @Override
     protected String getToolTip(MemoriaAllapot adat) {
         return String.format(
-            "Memória: %s usr, %s shr, %s free, %s cache, %s buff, %s avaiable",
+            """
+            usr:%2.0f,cache:%2.0f,free:%2.0f,buff:%2.0f,dirt:%2.0f/%2.0f,av:%2.0f""",
             adat.memFelhasznalt(),
-            adat.shared(),
-            adat.free(),
             adat.cache(),
+            adat.free(),
             adat.buffers(),
+            adat.dirty(),
+            adat.writeback(),
             adat.avaiable()
         );
     }

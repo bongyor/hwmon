@@ -1,6 +1,5 @@
 package hu.hwmon.io;
 
-import hu.hwmon.dto.HwMonException;
 import hu.hwmon.dto.MemoriaAllapot;
 
 import java.time.LocalDateTime;
@@ -27,10 +26,8 @@ public class MemoriaFigyelo extends Figyelo<MemoriaAllapot> {
     double swapTotal = meminfo.get("SwapTotal") / 1024;
     double swapCache = meminfo.get("SwapCached") / 1024;
     double swapFree = meminfo.get("SwapFree") / 1024;
-    double shmem = meminfo.get("Shmem") / 1024;
     double buffers = meminfo.get("Buffers") / 1024;
     double cache = meminfo.get("Cached") / 1024;
-    double cachedInactive = meminfo.get("Inactive(file)") / 1024;
     double anonymusInactive = meminfo.get("Inactive(anon)") / 1024;
     double dirty = meminfo.get("Dirty") / 1024;
     double writeback = meminfo.get("Writeback") / 1024;
@@ -46,9 +43,8 @@ public class MemoriaFigyelo extends Figyelo<MemoriaAllapot> {
         swapFelhasznalt,
         swapCache,
         swapActiveAnon,
-        shmem,
         buffers,
-        cache - cachedInactive - dirty - writeback,
+        cache - dirty - writeback,
         dirty,
         writeback,
         memAvailable,
