@@ -10,7 +10,7 @@ import java.util.List;
 public class SwapIkon extends TaskbarIkon<MemoriaAllapot> {
     private static final Color[] szinek = new Color[] {
         Color.RED,
-        new Color(181, 58, 225),
+        new Color(50, 110, 255),
         new Color(200, 255, 0),
         Color.BLACK
     };
