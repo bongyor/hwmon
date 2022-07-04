@@ -33,7 +33,7 @@ public class SwapIkon extends TaskbarIkon<MemoriaAllapot> {
     @Override
     protected String getToolTip(MemoriaAllapot adat) {
         return String.format(
-            "SWAP: %2.0f (%2.0f, +%2.0f)/%2.0f",
+            "SWAP: %2.0f (inactive: %2.0f, cache:  %2.0f)/%2.0f",
             adat.swapActiveAnon(),
             adat.swapFelhasznalt(),
             adat.swapCache(),
