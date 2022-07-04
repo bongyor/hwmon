@@ -9,9 +9,12 @@ public record MemoriaAllapot(
     double memFelhasznalt,
     double swapFelhasznalt,
     double swapCache,
+    double swapActiveAnon,
     double shared,
     double buffers,
     double cache,
+    double dirty,
+    double writeback,
     double avaiable,
     double free
 ) {

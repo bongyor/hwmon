@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class MemoriaFigyelo extends Figyelo<MemoriaAllapot> {
   private final Shell shell = new Shell();
   private final Pattern pattern = Pattern.compile(
-      "^(?<kulcs>[a-zA-Z\\d]+):\\s+(?<ertek>\\d+)\\s+kB\\s*$"
+      "^(?<kulcs>[a-zA-Z\\d()]+):\\s+(?<ertek>\\d+)\\s+kB\\s*$"
   );
 
   @Override
@@ -29,19 +29,28 @@ public class MemoriaFigyelo extends Figyelo<MemoriaAllapot> {
     double swapFree = meminfo.get("SwapFree") / 1024;
     double shmem = meminfo.get("Shmem") / 1024;
     double buffers = meminfo.get("Buffers") / 1024;
-    double cached = meminfo.get("Cached") / 1024;
+    double cache = meminfo.get("Cached") / 1024;
+    double cachedInactive = meminfo.get("Inactive(file)") / 1024;
+    double anonymusInactive = meminfo.get("Inactive(anon)") / 1024;
+    double dirty = meminfo.get("Dirty") / 1024;
+    double writeback = meminfo.get("Writeback") / 1024;
     double memFree = meminfo.get("MemFree") / 1024;
     double memAvailable = meminfo.get("MemAvailable") / 1024;
+    double swapFelhasznalt = swapTotal - swapFree - swapCache;
+    double swapActiveAnon = Math.max(swapFelhasznalt - anonymusInactive, 0);
     return new MemoriaAllapot(
         now,
         memTotal,
         swapTotal,
-        memTotal - memFree - buffers - cached,
-        swapTotal - swapFree - swapCache,
+        memTotal - memFree - buffers - cache,
+        swapFelhasznalt,
         swapCache,
+        swapActiveAnon,
         shmem,
         buffers,
-        cached,
+        cache - cachedInactive - dirty - writeback,
+        dirty,
+        writeback,
         memAvailable,
         memFree
     );

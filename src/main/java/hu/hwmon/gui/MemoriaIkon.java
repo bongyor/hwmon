@@ -14,6 +14,8 @@ public class MemoriaIkon extends TaskbarIkon<MemoriaAllapot> {
         Color.BLACK,
         Color.YELLOW,
         Color.BLUE,
+        new Color(255, 0, 0),
+        new Color(159, 76, 17)
     };
 
     @Override
@@ -23,7 +25,9 @@ public class MemoriaIkon extends TaskbarIkon<MemoriaAllapot> {
             adat.shared(),
             adat.free(),
             adat.cache(),
-            adat.buffers()
+            adat.buffers(),
+            adat.dirty(),
+            adat.writeback()
         );
     }
 
