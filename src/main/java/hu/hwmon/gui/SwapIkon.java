@@ -10,6 +10,7 @@ import java.util.List;
 public class SwapIkon extends TaskbarIkon<MemoriaAllapot> {
     private static final Color[] szinek = new Color[] {
         Color.RED,
+        new Color(200, 255, 0),
         Color.BLACK
     };
 
@@ -17,7 +18,8 @@ public class SwapIkon extends TaskbarIkon<MemoriaAllapot> {
     protected List<Double> formatter(MemoriaAllapot adat) {
         return Arrays.asList(
             adat.swapFelhasznalt(),
-            adat.swapOsszes() - adat.swapFelhasznalt()
+            adat.swapCache(),
+            adat.swapOsszes() - adat.swapFelhasznalt() - adat.swapCache()
         );
     }
 
@@ -29,8 +31,9 @@ public class SwapIkon extends TaskbarIkon<MemoriaAllapot> {
     @Override
     protected String getToolTip(MemoriaAllapot adat) {
         return String.format(
-            "SWAP: %s/%s",
+            "SWAP: %s(+%s)/%s",
             adat.swapFelhasznalt(),
+            adat.swapCache(),
             adat.swapOsszes()
         );
     }

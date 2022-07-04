@@ -8,6 +8,7 @@ public record MemoriaAllapot(
     double swapOsszes,
     double memFelhasznalt,
     double swapFelhasznalt,
+    double swapCache,
     double shared,
     double buffers,
     double cache,

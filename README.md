@@ -25,5 +25,4 @@ Rendszer monitor, ami pici aranyos ikonokat rajzol a taskbarra a cpu és memóri
 
 ## TODO
 
-* /proc resource használata mindenhol
 * windows, mac
