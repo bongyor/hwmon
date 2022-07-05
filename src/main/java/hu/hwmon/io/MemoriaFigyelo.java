@@ -22,27 +22,28 @@ public class MemoriaFigyelo extends Figyelo<MemoriaAllapot> {
 
   MemoriaAllapot feldolgoz(String output, LocalDateTime now) {
     Map<String, Double> meminfo = parseMeminfoMap(output);
-    double memTotal = meminfo.get("MemTotal") / 1024;
-    double swapTotal = meminfo.get("SwapTotal") / 1024;
-    double swapCache = meminfo.get("SwapCached") / 1024;
-    double swapFree = meminfo.get("SwapFree") / 1024;
-    double buffers = meminfo.get("Buffers") / 1024;
-    double cache = meminfo.get("Cached") / 1024;
-    double anonymusInactive = meminfo.get("Inactive(anon)") / 1024;
-    double dirty = meminfo.get("Dirty") / 1024;
-    double writeback = meminfo.get("Writeback") / 1024;
-    double memFree = meminfo.get("MemFree") / 1024;
-    double memAvailable = meminfo.get("MemAvailable") / 1024;
+    double memTotal = meminfo.get("MemTotal");
+    double swapTotal = meminfo.get("SwapTotal");
+    double swapCache = meminfo.get("SwapCached");
+    double swapFree = meminfo.get("SwapFree");
+    double buffers = meminfo.get("Buffers");
+    double cache = meminfo.get("Cached");
+    double inactive = meminfo.get("Inactive");
+    double dirty = meminfo.get("Dirty");
+    double writeback = meminfo.get("Writeback");
+    double memFree = meminfo.get("MemFree");
+    double memAvailable = meminfo.get("MemAvailable");
     double swapFelhasznalt = swapTotal - swapFree - swapCache;
-    double swapActiveAnon = Math.max(swapFelhasznalt - anonymusInactive, 0);
+    double swapActive = Math.max(swapFelhasznalt - inactive, 0);
     return new MemoriaAllapot(
         now,
         memTotal,
         swapTotal,
         memTotal - memFree - buffers - cache,
-        swapFelhasznalt,
+        swapFelhasznalt - swapActive,
         swapCache,
-        swapActiveAnon,
+        swapActive,
+        swapFree,
         buffers,
         cache - dirty - writeback,
         dirty,
@@ -59,7 +60,7 @@ public class MemoriaFigyelo extends Figyelo<MemoriaAllapot> {
         .collect(
             Collectors.toMap(
                 matcher -> matcher.group("kulcs"),
-                matcher -> Double.parseDouble(matcher.group("ertek"))
+                matcher -> Double.parseDouble(matcher.group("ertek")) / 1024
             )
         );
   }

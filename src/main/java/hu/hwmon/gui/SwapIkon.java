@@ -19,9 +19,9 @@ public class SwapIkon extends TaskbarIkon<MemoriaAllapot> {
     protected List<Double> formatter(MemoriaAllapot adat) {
         return Arrays.asList(
             adat.swapActiveAnon(),
-            adat.swapFelhasznalt() - adat.swapActiveAnon(),
+            adat.swapInactive(),
             adat.swapCache(),
-            adat.swapOsszes() - adat.swapFelhasznalt() - adat.swapCache()
+            adat.swapFree()
         );
     }
 
@@ -35,7 +35,7 @@ public class SwapIkon extends TaskbarIkon<MemoriaAllapot> {
         return String.format(
             "SWAP: %2.0f (inactive: %2.0f, cache:  %2.0f)/%2.0f",
             adat.swapActiveAnon(),
-            adat.swapFelhasznalt(),
+            adat.swapInactive(),
             adat.swapCache(),
             adat.swapOsszes()
         );

@@ -78,6 +78,7 @@ class MemoriaFigyeloTest {
             339.41796875,
             68.83203125,
             0,
+            571.74609375,
             41.40625,
             3731.98046875,
             208.92578125,
@@ -95,6 +96,14 @@ class MemoriaFigyeloTest {
             allapot.writeback() +
             allapot.free() +
             allapot.buffers(),
+        1.0
+    );
+    assertEquals(
+        allapot.swapOsszes(),
+        allapot.swapActiveAnon() +
+            allapot.swapInactive() +
+            allapot.swapCache() +
+            allapot.swapFree(),
         1.0
     );
   }
