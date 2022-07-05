@@ -1,9 +1,6 @@
 package hu.hwmon.api;
 
-import hu.hwmon.gui.HalozatIkon;
-import hu.hwmon.gui.MemoriaIkon;
-import hu.hwmon.gui.ProcesszorIkon;
-import hu.hwmon.gui.SwapIkon;
+import hu.hwmon.gui.*;
 import hu.hwmon.io.HalozatFigyelo;
 import hu.hwmon.io.MemoriaFigyelo;
 import hu.hwmon.io.ProcesszorFigyelo;
@@ -17,6 +14,7 @@ public class Main {
     private static final ProcesszorIkon processzorIkon = new ProcesszorIkon();
     private static final MemoriaIkon memoriaIkon = new MemoriaIkon();
     private static final SwapIkon swapIkon = new SwapIkon();
+    private static final MemoriaAktivitasIkon memoriaAktivitasIkon = new MemoriaAktivitasIkon();
     private static final HalozatIkon halozatIkon = new HalozatIkon();
 
     private static final MemoriaFigyelo memoriaFigyelo = new MemoriaFigyelo();
@@ -53,6 +51,7 @@ public class Main {
             var memoriaAllapot = memoriaFigyelo.getAllapot();
             memoriaIkon.ujraRajzolas(memoriaAllapot);
             swapIkon.ujraRajzolas(memoriaAllapot);
+            memoriaAktivitasIkon.ujraRajzolas(memoriaAllapot);
             halozatIkon.ujraRajzolas(halozatFigyelo.getAllapot());
         } catch (Exception e) {
             logger.log(System.Logger.Level.ERROR, "Hiba a frissítés közben: " + e.getMessage(), e);

@@ -35,6 +35,11 @@ public class MemoriaFigyelo extends Figyelo<MemoriaAllapot> {
     double memAvailable = meminfo.get("MemAvailable");
     double swapFelhasznalt = swapTotal - swapFree - swapCache;
     double swapActive = Math.max(swapFelhasznalt - inactive, 0);
+    double activeAnon = meminfo.get("Active(anon)");
+    double inactiveAnon = meminfo.get("Inactive(anon)");
+    double activeFile = meminfo.get("Active(file)");
+    double inactiveFile = meminfo.get("Inactive(file)");
+
     return new MemoriaAllapot(
         now,
         memTotal,
@@ -49,7 +54,11 @@ public class MemoriaFigyelo extends Figyelo<MemoriaAllapot> {
         dirty,
         writeback,
         memAvailable,
-        memFree
+        memFree,
+        activeAnon,
+        inactiveAnon,
+        activeFile,
+        inactiveFile
     );
   }
 

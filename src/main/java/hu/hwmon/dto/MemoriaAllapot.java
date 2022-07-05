@@ -16,6 +16,10 @@ public record MemoriaAllapot(
     double dirty,
     double writeback,
     double avaiable,
-    double free
+    double free,
+    double activeAnon,
+    double inactiveAnon,
+    double activeFile,
+    double inactiveFile
 ) {
 }
