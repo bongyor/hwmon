@@ -1,7 +1,9 @@
-package hu.hwmon.io;
+package hu.hwmon.io.linux;
 
 import hu.hwmon.dto.HwMonException;
 import hu.hwmon.dto.ProcesszorAllapot;
+import hu.hwmon.io.Figyelo;
+import hu.hwmon.io.Shell;
 
 import java.time.LocalDateTime;
 import java.util.regex.Matcher;
@@ -10,9 +12,9 @@ import java.util.regex.Pattern;
 public class ProcesszorFigyelo extends Figyelo<ProcesszorAllapot> {
     private final Shell shell = new Shell();
     private final Pattern pattern = Pattern.compile(
-        "^\\s*cpu +(?<user>[0-9]+) +(?<nice>[0-9]+) +(?<system>[0-9]+) +" +
-            "(?<idle>[0-9]+) +(?<iowait>[0-9]+) +(?<irq>[0-9]+) +(?<softirq>[0-9]+) +(?<steal>[0-9]+) +" +
-            "(?<guest>[0-9]+) +(?<guestnice>[0-9]+)\\s*$",
+        "^\\s*cpu +(?<user>\\d+) +(?<nice>\\d+) +(?<system>\\d+) +" +
+            "(?<idle>\\d+) +(?<iowait>\\d+) +(?<irq>\\d+) +(?<softirq>\\d+) +(?<steal>\\d+) +" +
+            "(?<guest>\\d+) +(?<guestnice>\\d+)\\s*$",
         Pattern.DOTALL
     );
 

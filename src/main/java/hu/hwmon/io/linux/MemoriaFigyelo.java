@@ -1,6 +1,8 @@
-package hu.hwmon.io;
+package hu.hwmon.io.linux;
 
 import hu.hwmon.dto.MemoriaAllapot;
+import hu.hwmon.io.Figyelo;
+import hu.hwmon.io.Shell;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;

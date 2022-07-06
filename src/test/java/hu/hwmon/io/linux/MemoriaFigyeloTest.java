@@ -1,4 +1,4 @@
-package hu.hwmon.io;
+package hu.hwmon.io.linux;
 
 import hu.hwmon.dto.MemoriaAllapot;
 import org.junit.jupiter.api.Test;

@@ -1,17 +1,17 @@
-package hu.hwmon.gui;
+package hu.hwmon.io;
 
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TaskbarIkonTest {
+class IconBackendTest {
 
     @Test
     void getPixelszamok() {
-        var ikon = new MemoriaIkon();
-
+        var ikon = new IconBackend(new Color[]{}, null);
         var pixelSzamok = ikon.getPixelszamok(Arrays.asList(333.0, 666.0, 999.0));
         assertArrayEquals(
             new int[] {4, 7, 11},
