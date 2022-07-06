@@ -70,12 +70,6 @@
                         </goals>
                         <configuration>
                             <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                            <overWriteReleases>false</overWriteReleases>
-                            <overWriteSnapshots>false</overWriteSnapshots>
-                            <overWriteIfNewer>true</overWriteIfNewer>
-                            <excludeTransitive>true</excludeTransitive>
-                            <includeScope>runtime</includeScope>
-                            <excludeArtifactIds>mapstruct-processor,lombok</excludeArtifactIds>
                         </configuration>
                     </execution>
                 </executions>
