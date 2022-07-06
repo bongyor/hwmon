@@ -1,7 +1,7 @@
 package hu.hwmon.io;
 
-import hu.hwmon.api.HwMonException;
 import hu.hwmon.dto.HalozatAllapot;
+import hu.hwmon.dto.HwMonException;
 import hu.hwmon.dto.MemoriaAllapot;
 import hu.hwmon.dto.ProcesszorAllapot;
 import hu.hwmon.io.linux.LinuxFigyeloFactory;
