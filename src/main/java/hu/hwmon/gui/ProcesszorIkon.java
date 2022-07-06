@@ -42,7 +42,7 @@ public class ProcesszorIkon extends TaskbarIkon<ProcesszorAllapot.Szazalekos> {
         new SavMetaAdatok<>(
             "Egyéb",
             ProcesszorAllapot.Szazalekos::other,
-            Color.WHITE
+            Color.MAGENTA
         ),
         new SavMetaAdatok<>(
             "IDLE",

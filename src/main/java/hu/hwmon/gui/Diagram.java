@@ -14,7 +14,7 @@ import java.awt.*;
 import java.util.function.Supplier;
 
 public class Diagram extends JFrame {
-  public static final Dimension DEFAULT_CONTENT_SIZE = new Dimension(1024, 768);
+  public static final Dimension DEFAULT_CONTENT_SIZE = new Dimension(500, 400);
   private final transient Supplier<PieDataset3D<String>> dataSupplier;
   private final PiePlot3D plot;
 
@@ -41,7 +41,7 @@ public class Diagram extends JFrame {
     chart.setTitleAnchor(TitleAnchor.TOP_LEFT);
     PiePlot3D plotLocal = (PiePlot3D) chart.getPlot();
     plotLocal.setLegendLabelGenerator(new StandardPieLabelGenerator(diagramErtekTemplate));
-    plotLocal.setSectionLabelGenerator(new StandardPieLabelGenerator(diagramErtekTemplate));
+    feketeSzinCserejeFeherreMertJobbanNezKi(szinek);
     plotLocal.setSectionColors(szinek);
     Chart3DPanel chartPanel = new Chart3DPanel(chart);
     chartPanel.setMargin(0.15);
@@ -49,5 +49,13 @@ public class Diagram extends JFrame {
     content.add(new DisplayPanel3D(chartPanel));
     plot = (PiePlot3D) chart.getPlot();
     getContentPane().add(content);
+  }
+
+  private void feketeSzinCserejeFeherreMertJobbanNezKi(Color[] szinek) {
+    for (int i = 0; i < szinek.length; i++) {
+      if (szinek[i].equals(Color.BLACK)) {
+        szinek[i] = Color.WHITE;
+      }
+    }
   }
 }
