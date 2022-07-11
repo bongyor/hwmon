@@ -5,11 +5,16 @@ import hu.hwmon.dto.HalozatDiff;
 
 import java.time.temporal.ChronoUnit;
 
-public class HalozatMapper {
+public class HalozatMapper extends EventBroadcaster<HalozatDiff> implements Listener<HalozatAllapot> {
   private HalozatAllapot utolsoAllapot = null;
   private double maxSavszelesseg = 1;
 
-  public HalozatDiff map(HalozatAllapot adat) {
+  @Override
+  public void listenEvent(HalozatAllapot data) {
+    fireEvent(map(data));
+  }
+
+  private HalozatDiff map(HalozatAllapot adat) {
     if (utolsoAllapot == null) {
       utolsoAllapot = adat;
     }
@@ -42,5 +47,4 @@ public class HalozatMapper {
       maxSavszelesseg = aktualis;
     }
   }
-
 }

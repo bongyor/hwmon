@@ -3,24 +3,14 @@ package hu.hwmon.api;
 import hu.hwmon.dto.HalozatAllapot;
 import hu.hwmon.dto.MemoriaAllapot;
 import hu.hwmon.dto.ProcesszorAllapot;
-import hu.hwmon.gui.*;
 import hu.hwmon.io.AbstractFigyeloFactory;
 import hu.hwmon.io.Figyelo;
 import hu.hwmon.io.VerifyModularization;
-import hu.hwmon.logic.HalozatMapper;
 
 import java.util.concurrent.TimeUnit;
 
 public class Main {
   private static final System.Logger logger = System.getLogger("hwmon");
-
-  private static final ProcesszorIkon processzorIkon = new ProcesszorIkon();
-  private static final MemoriaIkon memoriaIkon = new MemoriaIkon();
-  private static final SwapIkon swapIkon = new SwapIkon();
-  private static final MemoriaAktivitasIkon memoriaAktivitasIkon = new MemoriaAktivitasIkon();
-  private static final HalozatIkon halozatIkon = new HalozatIkon();
-
-  private static final HalozatMapper halozatMapper = new HalozatMapper();
 
   private static Figyelo<MemoriaAllapot> memoriaFigyelo;
   private static Figyelo<ProcesszorAllapot> processzorFigyelo;
@@ -61,12 +51,9 @@ public class Main {
 
   private static void frissites() {
     try {
-      processzorIkon.ujraRajzolas(processzorFigyelo.getAllapot().getSzazalekos());
-      var memoriaAllapot = memoriaFigyelo.getAllapot();
-      memoriaIkon.ujraRajzolas(memoriaAllapot);
-      swapIkon.ujraRajzolas(memoriaAllapot);
-      memoriaAktivitasIkon.ujraRajzolas(memoriaAllapot);
-      halozatIkon.ujraRajzolas(halozatMapper.map(halozatFigyelo.getAllapot()));
+      memoriaFigyelo.refresh();
+      processzorFigyelo.refresh();
+      halozatFigyelo.refresh();
     } catch (Exception e) {
       logger.log(System.Logger.Level.ERROR, "Hiba a frissítés közben: " + e.getMessage(), e);
     }

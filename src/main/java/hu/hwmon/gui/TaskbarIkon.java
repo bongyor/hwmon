@@ -1,6 +1,7 @@
 package hu.hwmon.gui;
 
 import hu.hwmon.io.IconBackend;
+import hu.hwmon.logic.Listener;
 import org.jfree.chart3d.data.PieDataset3D;
 import org.jfree.chart3d.data.StandardPieDataset3D;
 
@@ -8,7 +9,7 @@ import java.awt.*;
 import java.util.List;
 import java.util.function.Function;
 
-public abstract class TaskbarIkon<T> {
+public abstract class TaskbarIkon<T> implements Listener<T> {
   public record SavMetaAdatok<T>(
       String megnevezes,
       Function<T, Double> getter,
@@ -44,6 +45,17 @@ public abstract class TaskbarIkon<T> {
     }
   }
 
+  @Override
+  public void listenEvent(T data) {
+    lastData = data;
+    if (iconBackend == null) {
+      init();
+    }
+    iconBackend.ujraRajzol(getAranyok(data));
+    iconBackend.setToolTip(getToolTip(data));
+    diagramUjrarajzolasaHaSzukseges();
+  }
+
   protected abstract String getDiagramErtekTemplate();
 
   protected abstract String getTitle();
@@ -65,16 +77,6 @@ public abstract class TaskbarIkon<T> {
   }
 
   protected abstract List<SavMetaAdatok<T>> getSavMetaAdatok();
-
-  public void ujraRajzolas(T adat) {
-    lastData = adat;
-    if (iconBackend == null) {
-      init();
-    }
-    iconBackend.ujraRajzol(getAranyok(adat));
-    iconBackend.setToolTip(getToolTip(adat));
-    diagramUjrarajzolasaHaSzukseges();
-  }
 
   private void diagramUjrarajzolasaHaSzukseges() {
     if (diagram != null && diagram.isVisible()) {
