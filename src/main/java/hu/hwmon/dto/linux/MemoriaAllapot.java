@@ -1,4 +1,4 @@
-package hu.hwmon.dto;
+package hu.hwmon.dto.linux;
 
 import java.time.LocalDateTime;
 

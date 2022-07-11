@@ -1,8 +1,5 @@
 package hu.hwmon.api;
 
-import hu.hwmon.dto.HalozatAllapot;
-import hu.hwmon.dto.MemoriaAllapot;
-import hu.hwmon.dto.ProcesszorAllapot;
 import hu.hwmon.io.AbstractFigyeloFactory;
 import hu.hwmon.io.Figyelo;
 import hu.hwmon.io.VerifyModularization;
@@ -12,9 +9,9 @@ import java.util.concurrent.TimeUnit;
 public class Main {
   private static final System.Logger logger = System.getLogger("hwmon");
 
-  private static Figyelo<MemoriaAllapot> memoriaFigyelo;
-  private static Figyelo<ProcesszorAllapot> processzorFigyelo;
-  private static Figyelo<HalozatAllapot> halozatFigyelo;
+  private static Figyelo<?> memoriaFigyelo;
+  private static Figyelo<?> processzorFigyelo;
+  private static Figyelo<?> halozatFigyelo;
 
 
   private static boolean run = true;

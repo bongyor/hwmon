@@ -1,15 +1,12 @@
 package hu.hwmon.io;
 
-import hu.hwmon.dto.HalozatAllapot;
 import hu.hwmon.dto.HwMonException;
-import hu.hwmon.dto.MemoriaAllapot;
-import hu.hwmon.dto.ProcesszorAllapot;
 import hu.hwmon.io.linux.LinuxFigyeloFactory;
 
 public interface AbstractFigyeloFactory {
-  Figyelo<MemoriaAllapot> createMemoriaFigyelo();
-  Figyelo<ProcesszorAllapot> createProcesszorFigyelo();
-  Figyelo<HalozatAllapot> createHalozatFigyelo();
+  Figyelo<?> createMemoriaFigyelo();
+  Figyelo<?> createProcesszorFigyelo();
+  Figyelo<?> createHalozatFigyelo();
 
   static AbstractFigyeloFactory getInstance() {
     return switch (OsDetect.detect()) {

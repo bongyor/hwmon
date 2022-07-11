@@ -1,6 +1,6 @@
 package hu.hwmon.io.linux;
 
-import hu.hwmon.dto.MemoriaAllapot;
+import hu.hwmon.dto.linux.MemoriaAllapot;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

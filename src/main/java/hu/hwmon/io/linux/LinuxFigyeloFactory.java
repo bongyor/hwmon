@@ -1,9 +1,10 @@
 package hu.hwmon.io.linux;
 
-import hu.hwmon.dto.HalozatAllapot;
-import hu.hwmon.dto.MemoriaAllapot;
-import hu.hwmon.dto.ProcesszorAllapot;
-import hu.hwmon.gui.*;
+import hu.hwmon.gui.HalozatIkon;
+import hu.hwmon.gui.ProcesszorIkon;
+import hu.hwmon.gui.linux.MemoriaAktivitasIkon;
+import hu.hwmon.gui.linux.MemoriaIkon;
+import hu.hwmon.gui.linux.SwapIkon;
 import hu.hwmon.io.AbstractFigyeloFactory;
 import hu.hwmon.io.Figyelo;
 import hu.hwmon.logic.HalozatMapper;
@@ -11,7 +12,7 @@ import hu.hwmon.logic.ProcesszorMapper;
 
 public class LinuxFigyeloFactory implements AbstractFigyeloFactory {
   @Override
-  public Figyelo<MemoriaAllapot> createMemoriaFigyelo() {
+  public Figyelo<?> createMemoriaFigyelo() {
     MemoriaFigyelo memoriaFigyelo = new MemoriaFigyelo();
     memoriaFigyelo.addListener(new MemoriaIkon());
     memoriaFigyelo.addListener(new MemoriaAktivitasIkon());
@@ -20,7 +21,7 @@ public class LinuxFigyeloFactory implements AbstractFigyeloFactory {
   }
 
   @Override
-  public Figyelo<ProcesszorAllapot> createProcesszorFigyelo() {
+  public Figyelo<?> createProcesszorFigyelo() {
     ProcesszorFigyelo processzorFigyelo = new ProcesszorFigyelo();
     ProcesszorMapper mapper = new ProcesszorMapper();
     mapper.addListener(new ProcesszorIkon());
@@ -29,7 +30,7 @@ public class LinuxFigyeloFactory implements AbstractFigyeloFactory {
   }
 
   @Override
-  public Figyelo<HalozatAllapot> createHalozatFigyelo() {
+  public Figyelo<?> createHalozatFigyelo() {
     HalozatFigyelo halozatFigyelo = new HalozatFigyelo();
     HalozatMapper mapper = new HalozatMapper();
     mapper.addListener(new HalozatIkon());

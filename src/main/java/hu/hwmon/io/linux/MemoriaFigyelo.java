@@ -1,6 +1,6 @@
 package hu.hwmon.io.linux;
 
-import hu.hwmon.dto.MemoriaAllapot;
+import hu.hwmon.dto.linux.MemoriaAllapot;
 import hu.hwmon.io.Figyelo;
 import hu.hwmon.io.Shell;
 

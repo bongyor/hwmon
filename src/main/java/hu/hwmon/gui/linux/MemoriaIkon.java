@@ -1,6 +1,7 @@
-package hu.hwmon.gui;
+package hu.hwmon.gui.linux;
 
-import hu.hwmon.dto.MemoriaAllapot;
+import hu.hwmon.dto.linux.MemoriaAllapot;
+import hu.hwmon.gui.TaskbarIkon;
 
 import java.awt.*;
 import java.util.List;
