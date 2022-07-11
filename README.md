@@ -25,3 +25,7 @@ Rendszer monitor, ami pici aranyos ikonokat rajzol a taskbarra a cpu és memóri
 ## TODO
 
 * windows, mac
+### GraalVM natív fordítás
+Előfeltételek linuxon: `sudo apt install libxi-dev libxrender-dev libfreetype-dev`
+
+Akadály: https://github.com/oracle/graal/issues/4594
