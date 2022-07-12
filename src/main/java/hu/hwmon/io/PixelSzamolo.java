@@ -5,9 +5,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PixelSzamolo {
-    private static final int ALSO_SAV = 2;
+    private static int alsoSav = 2;
     private final int oszlopPixelszam;
 
+    public static void setAlsoSav(int alsoSav) {
+        PixelSzamolo.alsoSav = alsoSav;
+    }
+
+    public static int getAlsoSav() {
+        return alsoSav;
+    }
     public PixelSzamolo(int oszlopPixelszam) {
         this.oszlopPixelszam = oszlopPixelszam;
     }
@@ -15,17 +22,17 @@ public class PixelSzamolo {
 
     int[] getPixelszamok(List<Double> aranyok) {
         var summ = aranyok.stream().mapToDouble(Double::doubleValue).sum();
-        var egyPixelErteke = summ / (oszlopPixelszam - ALSO_SAV);
+        var egyPixelErteke = summ / (oszlopPixelszam - alsoSav);
         var pixelek = aranyok
-            .stream()
-            .map(arany -> Math.round(arany / egyPixelErteke))
-            .collect(Collectors.toList());
+                .stream()
+                .map(arany -> Math.round(arany / egyPixelErteke))
+                .collect(Collectors.toList());
 
-        if (pixelek.stream().mapToLong(Long::longValue).sum() < oszlopPixelszam - ALSO_SAV) {
+        if (pixelek.stream().mapToLong(Long::longValue).sum() < oszlopPixelszam - alsoSav) {
             var legnagyobbArany = Collections.max(aranyok);
             var legnagyobbAranyIndex = aranyok.indexOf(legnagyobbArany);
             pixelek.set(legnagyobbAranyIndex, pixelek.get(legnagyobbAranyIndex) + 1);
-        } else if (pixelek.stream().mapToLong(Long::longValue).sum() > oszlopPixelszam - ALSO_SAV) {
+        } else if (pixelek.stream().mapToLong(Long::longValue).sum() > oszlopPixelszam - alsoSav) {
             var legnagyobbArany = Collections.max(aranyok);
             var legnagyobbAranyIndex = aranyok.indexOf(legnagyobbArany);
             pixelek.set(legnagyobbAranyIndex, pixelek.get(legnagyobbAranyIndex) - 1);

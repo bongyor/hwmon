@@ -10,7 +10,6 @@ import java.awt.image.MemoryImageSource;
 import java.util.List;
 
 public class IconBackend {
-    private static final int ALSO_SAV = 2;
     private final PixelSzamolo pixelSzamolo;
     private final Color[] szinek;
     private static SystemTray tray = null;
@@ -90,7 +89,7 @@ public class IconBackend {
     private int[] getUjOszlop(int[] pixelSzamok) {
         var oszlop = new int[getTrayIconSize().height];
         var pixelIndex = 0;
-        for (int i = 0; i < ALSO_SAV; i++) {
+        for (int i = 0; i < PixelSzamolo.getAlsoSav(); i++) {
             oszlop[pixelIndex++] = Color.magenta.getRGB();
         }
         for (int i = 0; i < pixelSzamok.length; i++) {

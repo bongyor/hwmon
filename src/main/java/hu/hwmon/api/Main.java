@@ -2,6 +2,7 @@ package hu.hwmon.api;
 
 import hu.hwmon.io.AbstractFigyeloFactory;
 import hu.hwmon.io.Figyelo;
+import hu.hwmon.io.PixelSzamolo;
 import hu.hwmon.io.VerifyModularization;
 
 import java.util.concurrent.TimeUnit;
@@ -17,6 +18,9 @@ public class Main {
   private static boolean run = true;
 
   public static void main(String[] args) {
+    if (args.length == 1) {
+      PixelSzamolo.setAlsoSav(Integer.parseInt(args[0]));
+    }
     initFigyelok();
     VerifyModularization.verify();
     addShutdownHook();
