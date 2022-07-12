@@ -18,9 +18,7 @@ public class Main {
   private static boolean run = true;
 
   public static void main(String[] args) {
-    if (args.length == 1) {
-      PixelSzamolo.setAlsoSav(Integer.parseInt(args[0]));
-    }
+    taskbarIkonVakSavBeallitasa(args);
     initFigyelok();
     VerifyModularization.verify();
     addShutdownHook();
@@ -28,6 +26,12 @@ public class Main {
     while (run) {
       frissites();
       sleepOneSec();
+    }
+  }
+
+  private static void taskbarIkonVakSavBeallitasa(String[] args) {
+    if (args.length == 1) {
+      PixelSzamolo.setAlsoSav(Integer.parseInt(args[0]));
     }
   }
 

@@ -25,31 +25,35 @@ public abstract class TaskbarIkon<T> implements Listener<T> {
 
   private T lastData;
 
-  private void init() {
+  private void initIconBackend() {
     savMetaAdatok = getSavMetaAdatok();
     iconBackend = IconBackend.build(getSzinekTomb(), this::toggleDiagram);
   }
 
   private void toggleDiagram() {
     if (diagram == null) {
-      diagram = new Diagram(
-          getTitle(),
-          this::getDiagramData,
-          getSzinekTomb(),
-          getDiagramErtekTemplate()
-      );
-      diagram.pack();
-      diagram.setVisible(true);
+      createDiagram();
     } else {
       diagram.setVisible(!diagram.isVisible());
     }
+  }
+
+  private void createDiagram() {
+    diagram = new Diagram(
+        getTitle(),
+        this::getDiagramData,
+        getSzinekTomb(),
+        getDiagramErtekTemplate()
+    );
+    diagram.pack();
+    diagram.setVisible(true);
   }
 
   @Override
   public void listenEvent(T data) {
     lastData = data;
     if (iconBackend == null) {
-      init();
+      initIconBackend();
     }
     iconBackend.ujraRajzol(getAranyok(data));
     iconBackend.setToolTip(getToolTip(data));
